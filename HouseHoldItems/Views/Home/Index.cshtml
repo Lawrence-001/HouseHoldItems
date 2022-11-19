@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Products>
+
+@{
+    ViewData["Title"] = "List of products";
+}
+<div>
+    <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search for an item" aria-label="Search">
+        <button class="btn btn-primary" type="submit" asp-action="" asp-controller="home">Search</button>
+    </form>
+</div>
+<div class="row justify-content-center">
+
+    <div class="card-deck">
+        @foreach (Products product in Model)
+        {
+            <div class="card m-4" style="min-width:200px; max-width:540px">
+                <div class="card-header text-center">
+                    @product.Name
+                </div>
+                <img src="~/images/sofa.jpg" style="width:40px height:30px" />
+                <div class="card-footer">
+                    <a asp-controller="home" asp-action="details" asp-route-Id="@product.ProductId" class="btn btn-outline-primary"> View</a>
+                    @* @Html.ActionLink("View","details" ,"home", new { id = product.ProductId },new {@class="btn btn-outline-primary"})*@
+                    <a asp-controller="home" asp-action="edit" asp-route-Id="@product.ProductId" class="btn btn-outline-success"> Edit</a>
+                    <a asp-controller="home" asp-action="delete" asp-route-Id="@product.ProductId" class="btn btn-outline-danger"> Delete</a>
+
+                </div>
+            </div>
+
+        }
+        <div style="position:fixed; right:25px; bottom:25px">
+            <a asp-controller="home" asp-action="create" class="btn btn-success">Add Product</a>
+        </div>
+
+    </div>
+
+</div>
